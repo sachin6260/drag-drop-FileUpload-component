@@ -1,0 +1,214 @@
+/* Container for the entire upload section */
+.file-upload-outer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px; /* Set a fixed width for the container */
+    position: relative; /* Make sure container is relative for absolute positioning of the drop line */
+  }
+  
+  /* Circular upload container */
+  .file-upload-container-wrapper {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    padding: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-bottom: 20px; /* Space between circle and file list */
+  }
+  
+  /* Circular upload container */
+  .file-upload-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Animated dotted border around the circle */
+  .file-upload-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 4px dashed #29b6f6;
+    border-radius: 50%;
+    animation: rotate 4s linear infinite;
+  }
+  
+  /* Animation for rotating the dotted border */
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Animation for the circle buffer when dragging files */
+  .file-upload-container.drag-active {
+    background-color: #f0f8ff; /* Light blue background color when dragging files */
+    animation: buffer 1s ease-in-out infinite;
+  }
+  
+  /* Animation for the circle buffer */
+  @keyframes buffer {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  /* Outer moving circle animation */
+  .file-upload-container-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px; /* Width and height of the moving outer circle */
+    height: 300px;
+    border: 2px solid #29b6f6; /* Border color of the moving outer circle */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center the circle */
+    animation: moveAround 5s linear infinite; /* Adjust animation duration as needed */
+  }
+  
+  /* Animation for the outer circle moving around */
+  @keyframes moveAround {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
+  /* Drop line animation */
+  .drop-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: #29b6f6;
+    transform: translateX(-50%);
+    animation: dropLine 2s linear infinite;
+  }
+  
+  /* Animation for the drop line */
+  @keyframes dropLine {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) scaleX(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(-50%) scaleX(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) scaleX(0);
+    }
+  }
+  
+  /* Content inside the circle */
+  .file-upload-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  /* Background setup for the body */
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #1e2a38 10%, #16212c 25%, #10171f 40%, #0c1217 55%, #0a0f13 70%);
+  }
+  
+  .upload-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: #4360ee; /* Folder icon color */
+  }
+  
+  .browse-link {
+    color: #29b6f6;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  p {
+    color: #333;
+  }
+  
+  /* Style for file list container */
+  .file-list-container {
+    width: 100%; /* Ensure the file list container takes full width */
+    text-align: center;
+    animation: fadeIn 0.5s ease-in; /* Animation for showing file list */
+  }
+  
+  /* Style for the file list */
+  .file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .file-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.5s ease-out; /* Animation for each file item */
+  }
+  
+  /* Animation for file list fading in */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Animation for file items sliding in */
+  @keyframes slideIn {
+    from {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .file-item p {
+    margin: 0;
+    color: #333;
+  }
+  
